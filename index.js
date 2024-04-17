@@ -1,4 +1,18 @@
-let maxNumberIdTask = 2;
+const keyStorage = 'key_task';
+let myTaskList = [];
+let maxNumberIdTask = 1;
+
+// Пытаемся получить массив задач из хранилища
+let storageData = localStorage.getItem(keyStorage);
+
+if (storageData != null) {
+    myTaskList = JSON.parse(storageData);
+    maxNumberIdTask = myTaskList
+        .map(x => x.id)
+        .reduce((a, b) => Math.max(a, b), -Infinity);
+
+    myTaskList.forEach(t => renderTaskItem(t));
+}
 
 document
     .getElementById('add-btn')
@@ -50,23 +64,35 @@ function addNewTask() {
     if (taskName) {
         maxNumberIdTask++;
 
-        const listElem = document
-            .getElementById('tsk-lst');
+        let newTask = {
+            id: maxNumberIdTask,
+            title: taskName,
+        };
 
-        const newTaskElem = document
-            .createElement('li');
-
-        newTaskElem.innerHTML = `
-        <div class="item-task">
-            <input class="chbox-to-change" id="chbox-task-${maxNumberIdTask}" name="chbox-task-${maxNumberIdTask}" type="checkbox"
-                    onchange="markDone(this)">
-            <label for="chbox-task-${maxNumberIdTask}">
-                ${taskName}
-            </label>
-        </div>`;
-
-        listElem.prepend(newTaskElem);
+        myTaskList.push(newTask); //добавляем новую задачу в наш список
+        renderTaskItem(newTask); // отрисовываем новую задачу
+        localStorage.setItem(keyStorage, JSON.stringify(myTaskList)); // обновляем запись в хранилище
     }
 
     taskNameElem.value = '';
+}
+
+function renderTaskItem(task) {
+
+    const listElem = document
+        .getElementById('tsk-lst');
+
+    const newTaskElem = document
+        .createElement('li');
+
+    newTaskElem.innerHTML = `
+    <div class="item-task">
+        <input class="chbox-to-change" id="chbox-task-${task.id}" name="chbox-task-${task.id}" type="checkbox"
+                onchange="markDone(this)">
+        <label for="chbox-task-${task.id}">
+            ${task.title}
+        </label>
+    </div>`;
+
+    listElem.prepend(newTaskElem);
 }
