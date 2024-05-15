@@ -16,24 +16,22 @@
 
 <body class="py-4 bg-body-tertiary">
     <main class="page-main">
-        <form>
-            <h1 class="h3 mb-3 fw-normal">Мои задачи</h1>
-            <p class="mt-5 mb-3 text-body-secondary">&copy; German&Corp - 2024</p>
-        </form>
 
-        <button type="button" class="btn btn-primary">Primary</button>
-        <button type="button" class="btn btn-secondary">Secondary</button>
-        <button type="button" class="btn btn-success">Success</button>
-        <button type="button" class="btn btn-danger">Danger</button>
-        <button type="button" class="btn btn-warning">Warning</button>
-        <button type="button" class="btn btn-info">Info</button>
-        <button type="button" class="btn btn-light">Light</button>
-        <button type="button" class="btn btn-dark">Dark</button>
-        <button type="button" class="btn btn-link">Link</button>
+        <h1 class="h3 mb-3 fw-normal">Мои задачи</h1>
+
+        <div class="input-group mb-3">
+            <input id="tsk-inp" type="text" class="form-control" placeholder="Что надо сделать?"
+                aria-label="Что надо сделать?" aria-describedby="add-btn">
+            <button id="add-btn" class="btn btn-success" type="button">Добавить</button>
+        </div>
+        <ul id="tsk-lst" class="list-group">
+        </ul>
+        <p class="mt-5 mb-3 text-body-secondary">&copy; German&Corp - 2024</p>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+    <script src="js/index.js"></script>
 </body>
 
 </html>

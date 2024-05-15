@@ -18,16 +18,7 @@ document
     .getElementById('add-btn')
     .onclick = addNewTask;
 
-document
-    .getElementById('tsk-lst')
-    .onmouseover = showActions;
-
-document
-    .getElementById('tsk-lst')
-    .onmouseout = hideActions;
-
 function markDone(elem) {
-    debugger
     let labelElem = document.querySelector(`[for="${elem.id}"]`);
     if (elem.checked) {
         labelElem.style.textDecoration = 'line-through';
@@ -85,14 +76,17 @@ function renderTaskItem(task) {
     const newTaskElem = document
         .createElement('li');
 
-    newTaskElem.innerHTML = `
-    <div class="item-task">
-        <input class="chbox-to-change" id="chbox-task-${task.id}" name="chbox-task-${task.id}" type="checkbox"
-                onchange="markDone(this)">
-        <label for="chbox-task-${task.id}">
-            ${task.title}
-        </label>
-    </div>`;
+    newTaskElem.innerHTML =
+        `<li class="list-group-item">
+            <input  class="form-check-input me-1"
+                    type="checkbox"
+                    id="chbox-task-${task.id}"
+                    onchange="markDone(this)">
+            <label  class="form-check-label stretched-link"
+                    for="chbox-task-${task.id}">
+                    ${task.title}
+            </label>
+        </li>`;
 
     listElem.prepend(newTaskElem);
 }
